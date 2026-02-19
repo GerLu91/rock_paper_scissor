@@ -19,113 +19,144 @@ function getComputerChoice () {
     console.log(randomNumber);
     return computerChoice;
 }
-
 /* 
-getHumanChoice
+function getHumanChoice(){
+    
+    
+    
+        
+        console.log("Log aus Switchstatement", humanChoice)
+        // return humanChoice;
+        }     
+    )  
+    return humanChoice;
+} */
 
-- variable with default value
-- Show message that tells user to input either R,P or S
-- Get Input from human
-- save in variable
-- make sure it is written in lowercase
-*/
 
-function getHumanChoice () {
-   let input = prompt("This is Rock, Paper Scissors. Please choose on of them and put in your choice");
-   let humanChoice = input.toLowerCase();
-   console.log(humanChoice);
-   return humanChoice;
-}
 
-/* 
-playGame
 
-- move Scors and playfunction in here so it fits the scope
-- after each round compare the amount of victories for each party
-- repeat until first player has 5 victories to win the game
-*/
+
 
 function playGame () {
 
-/* 
-- create two variables humanScore and computerScore. Default value 0
-*/
+
     let humanScore = 0;
     let computerScore = 0;
+    let container = document.querySelector('#container');
+    let score = document.querySelector('#score');
+    let list = document.createElement('ul')
+    list.id = 'text';
+    score.appendChild(list);
 
- /* 
-playRound
 
-- make Choices accessible
-- Take Human and Computer choices as input
-- compare their choices
-- calculate who won
-- print out what was chosen this round and who won
-- increment human or computerScore by one for each victory
-*/
-    function playRound () {
-    let hChoice = getHumanChoice();
+    function playRound (humanChoice) {
+    let hChoice = humanChoice;
     let cChoice = getComputerChoice();
-    console.log("Human Choice:" + hChoice);
-    console.log("PC Choice:" + cChoice);
+    
+    /* console.log("Human Choice:" + hChoice);
+    console.log("PC Choice:" + cChoice); */
 
-    if ( hChoice == "rock" && cChoice == "scissors" ) {
-        console.log("Good Job, You won this round!")
+    if (hChoice == cChoice) {
+        const p = document.createElement('p');
+        p.textContent = "This was a draw. Try again!";
+        p.id = "text";
+        list.appendChild(p); 
+        //console.log("This was a draw. Try again!")
+    }else if ( (hChoice == "rock" && cChoice == "scissors") || (hChoice == "paper" && cChoice == "rock" ) || (hChoice == "scissors" && cChoice == "paper" )) {
+        //console.log("Good Job, You won this round!")
         humanScore++;
-    } else if (hChoice == "rock" && cChoice == "paper" ){
-        console.log("Oh no, you lost this round!")
+        const p = document.createElement('p');
+        p.textContent = "Good Job, You won this round!";
+        p.id = "text";
+        list.appendChild(p);
+    } else  {
+        //console.log("Oh no, you lost this round!")
         computerScore++;
-    } else if (hChoice == "paper" && cChoice == "rock" ){
-        console.log("Good Job, You won this round!")
-        humanScore++;
-    } else if (hChoice == "paper" && cChoice == "scissors" ){
-        console.log("Oh no, you lost this round!")
-        computerScore++;
-    } else if (hChoice == "scissors" && cChoice == "paper" ){
-        console.log("Good Job, You won this round!")
-        humanScore++;
-    } else if (hChoice == "scissors" && cChoice == "rock" ){
-        console.log("Oh no, you lost this round!")
-        computerScore++;
-    } else if (hChoice == cChoice) {
-        console.log("This was a draw. Try again!")
-    }
-    console.log("The overall Score is: You " + humanScore + " vs PC: " + computerScore)
-
-
-    /* 
-    Recursive version. Did not work the first time because i put it outside of playRound body.
-    Keeping this here for future me to come back to this.
-    */
-
-    /* 
-    if (humanScore < 5 && computerScore < 5) {
-        playRound();
-    } else if (humanScore === 5) {
-        console.log("CONGRATS! You won the game!");
-    } else if (computerScore === 5) {
-        console.log("GAME OVER! The computer won.");
+        const p = document.createElement('p');
+        p.textContent = "Oh no, you lost this round!";
+        p.id = "text";
+        list.appendChild(p);
     } 
-    */
+    console.log("The overall Score is: You " + humanScore + " vs PC: " + computerScore)
+    const p = document.createElement('p');
+    p.textContent = "The overall Score is: You " + humanScore + " vs PC: " + computerScore;
+    list.appendChild(p);
+    declareWinner();
+
+
 }
   
-    /* 
-    Loop version. Chose a while loop because i wanted to have a winner.
-    With for loop too many draws
-     */
+let choice = container.addEventListener('click', (e) => {
+        let target = e.target;
+        // let humanChoice ="";
 
-    while (humanScore < 5 && computerScore < 5) {
-        playRound();
+        switch(target.id) {
+            case 'rock':
+                choice ="rock";
+                break;
+            case 'paper':
+                choice ="paper";
+                break;
+            case 'scissors':
+                choice = "scissors"
+                break;
+        }
+        return playRound(choice);
     }
-
-    if (humanScore === 5) {
-        console.log("CONGRATS! You won the game!");
+    
+)
+    
+function startNewGame (input){
+    if (input == "yes") {
+        alert("Great Choice! The scores have been reset. Just go ahead and play!")
+        clearPage();
+        humanScore = 0;
+        computerScore = 0;
+        
+    
     } else {
-        console.log("GAME OVER! The computer won.");
+        alert("Ok, see you next time!")
     }
+} 
 
 
+function checkUl (){
+    let ul = document.getElementById('text');
+    if (!ul ) {
+        document.createElement('ul')
+    list.id = 'text';
+    score.appendChild(list)
+    } else {}
+}    
 
+ function clearPage(){
+    let scoreDiv = document.getElementById('text');
+    while (scoreDiv.firstChild) {
+        scoreDiv.removeChild(scoreDiv.firstChild)
+    }
+    checkUl();
+  
 }
 
+function declareWinner (){
+    if (humanScore === 5) {
+        const p = document.createElement('p');
+        p.textContent ="CONGRATS! You won the game!";
+        p.id = "text";
+        let input = prompt("Want to start a new game?");
+        list.appendChild(p);
+        startNewGame(input);
+    } else if (computerScore === 5) {
+        const p = document.createElement('p');
+        p.textContent ="GAME OVER! The computer won.";
+        p.id = "text";
+        let input = prompt("Want to start a new game?");
+        list.appendChild(p);
+        startNewGame(input);
+}
+}
+}
+
+// let abc = getHumanChoice();
+// console.log(() => getHumanChoice);
 playGame();
