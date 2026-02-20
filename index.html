@@ -1,21 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- <input id="input" type="text" /> -->
-</head>
-<body>
-    <div id="container">
+  </head>
+
+  <body>
+    <div>
+      <div id="container">
         <button id="rock">Rock</button>
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
+      </div>
+      <div id="restart" style="visibility: hidden">
+        Want to restart the game?
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+      </div>
     </div>
+
     <div id="running-score">The score right now is:</div>
-    <div id="score">
-        
-    </div>
+    <div id="score"></div>
     <script src="javascript.js"></script>
-</body>
+  </body>
 </html>
