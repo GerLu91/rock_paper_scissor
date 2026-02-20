@@ -19,22 +19,6 @@ function getComputerChoice () {
     console.log(randomNumber);
     return computerChoice;
 }
-/* 
-function getHumanChoice(){
-    
-    
-    
-        
-        console.log("Log aus Switchstatement", humanChoice)
-        // return humanChoice;
-        }     
-    )  
-    return humanChoice;
-} */
-
-
-
-
 
 
 function playGame () {
@@ -44,7 +28,8 @@ function playGame () {
     let computerScore = 0;
     let container = document.querySelector('#container');
     let score = document.querySelector('#score');
-    let list = document.createElement('ul')
+    let list = document.createElement('ul');
+    let scoreDisplay = document.querySelector('#running-score');
     list.id = 'text';
     score.appendChild(list);
 
@@ -80,6 +65,7 @@ function playGame () {
     console.log("The overall Score is: You " + humanScore + " vs PC: " + computerScore)
     const p = document.createElement('p');
     p.textContent = "The overall Score is: You " + humanScore + " vs PC: " + computerScore;
+    scoreDisplay.textContent = `You: ${humanScore} PC: ${computerScore}`;
     list.appendChild(p);
     declareWinner();
 
@@ -143,9 +129,11 @@ function declareWinner (){
         const p = document.createElement('p');
         p.textContent ="CONGRATS! You won the game!";
         p.id = "text";
-        let input = prompt("Want to start a new game?");
         list.appendChild(p);
-        startNewGame(input);
+        setTimeout(() => {
+            let input = prompt("Want to start a new game?");
+            startNewGame(input);
+        }, 2000); 
     } else if (computerScore === 5) {
         const p = document.createElement('p');
         p.textContent ="GAME OVER! The computer won.";
