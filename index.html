@@ -4,16 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <input id="input" type="text" /> -->
   </head>
 
   <body>
     <div>
+      <!-- shows choices for the human -->
       <div id="container">
         <button id="rock">Rock</button>
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
       </div>
+      <!-- Container is hidden until game is over -->
       <div id="restart" style="visibility: hidden">
         Want to restart the game?
         <button id="yes">Yes</button>
@@ -21,7 +22,9 @@
       </div>
     </div>
 
+    <!-- shows score always on top -->
     <div id="running-score">The score right now is:</div>
+    <!-- gets updated with every round that is played -->
     <div id="score"></div>
     <script src="javascript.js"></script>
   </body>
